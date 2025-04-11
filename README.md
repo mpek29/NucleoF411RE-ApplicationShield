@@ -24,6 +24,9 @@
 | 📺 **SPI Communication**   | Control an LCD display using SPI.             |
 | 🎚️ **ADC Usage**         | Read potentiometer angles through ADC.        |
 
+## ApplicationShield Schematic
+<img src="assets/img/app_shield_sch.png" alt="Application Shield Schematics">
+
 ## 🎛️ Example Applications
 1. **GPIO Test**: Read/write values and generate PWM to control LED brightness on the board.
 2. **Button Press Detection**: Utilize timers to differentiate between short and long presses on a push button.
