@@ -25,7 +25,10 @@
 | 🎚️ **ADC Usage**         | Read potentiometer angles through ADC.        |
 
 ## ApplicationShield Schematic
-<img src="assets/img/app_shield_sch.png" alt="Application Shield Schematics">
+<img src="assets/img/app_shield_sch.png" alt="ApplicationShield Schematic">
+
+## Nucleo-F411RE Extension Schematic
+<img src="assets/img/nucleof411re_ext_con.png" alt="Nucleo-F411RE Extension Schematic">
 
 ## 🎛️ Example Applications
 1. **GPIO Test**: Read/write values and generate PWM to control LED brightness on the board.
