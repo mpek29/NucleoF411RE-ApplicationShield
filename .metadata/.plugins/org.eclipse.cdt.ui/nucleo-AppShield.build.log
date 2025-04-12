@@ -1,0 +1,10 @@
+13:49:34 **** Incremental Build of configuration Debug for project nucleo-AppShield ****
+make -j8 all 
+arm-none-eabi-size  nucleo-AppShield.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8192	     12	   1644	   9848	   2678	nucleo-AppShield.elf
+Finished building: default.size.stdout
+ 
+
+13:49:35 Build Finished. 0 errors, 0 warnings. (took 254ms)
+
