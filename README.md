@@ -32,12 +32,13 @@
 
 ## 🎛️ Example Applications
 1. **GPIO Test**: Read/write values and generate PWM to control LED brightness on the board.
-2. **Button Press Detection**: Utilize timers to differentiate between short and long presses on a push button.
-3. **LED Blinking with Interrupts**: Implement interrupt-driven blinking of an LED based on timer events or button presses.
-4. **Serial Communication**: Establish communication between the computer and Nucleo-F411RE for data exchange.
-5. **I2C Temperature Reading**: Communicate with the LM75 temperature sensor and MMA7660 accelerometer via I2C.
-6. **SPI LCD Control**: Use SPI to manage an LCD display connected to the development board.
-7. **ADC Potentiometer Reading**: Capture the angle of potentiometers using the ADC.
+2. **ADC Potentiometer Reading**: Capture the angle of potentiometers using the ADC.
+3. **Button Press Detection**: Utilize timers to differentiate between short and long presses on a push button.
+4. **LED Blinking with Interrupts**: Implement interrupt-driven blinking of an LED based on timer events or button presses.
+5. **Serial Communication**: Establish communication between the computer and Nucleo-F411RE for data exchange.
+6. **I2C Temperature Reading**: Communicate with the LM75 temperature sensor and MMA7660 accelerometer via I2C.
+7. **SPI LCD Control**: Use SPI to manage an LCD display connected to the development board.
+
 
 ## 📐 System Architecture
 | 🔌 GPIO Control | ⏲️ Timer Management | ⚠️ Interrupts | 💬 Serial Communication |
