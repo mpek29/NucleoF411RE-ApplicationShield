@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -88,47 +89,69 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART2_UART_Init();
+  MX_TIM1_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 #ifdef MAIN1
 
-  leds(LED_RED);                          //red led only
-  HAL_Delay(1000);
-  leds(LED_GREEN);                        //green led only
-  HAL_Delay(1000);
-  leds(LED_BLUE);                         //blue led only
-  HAL_Delay(1000);
-  leds(LED_RED | LED_GREEN | LED_BLUE);   //white color
-  HAL_Delay(1000);
-  leds(0);                                //leds turned off
-  HAL_Delay(1000);
+  /* === LED MODULE FUNCTIONALITY TESTS === */
 
-  //function red_led
-  red_led(1);                             //red led only
-  HAL_Delay(1000);
+  /* Full off (0%) */
+  leds (0);
+  HAL_Delay (500);
 
-  //function green_led
-  red_led(0);
-  green_led(1);                           //green led only
-  HAL_Delay(1000);
+  /* Low brightness (25%) */
+  leds (25);
+  HAL_Delay (500);
 
-  //function blue_led
-  green_led(0);
-  blue_led(1);                            //blue led only
-  HAL_Delay(1000);
-  blue_led(0);
-  HAL_Delay(1000);
+  /* Medium brightness (50%) */
+  leds (50);
+  HAL_Delay (500);
+
+  /* High brightness (75%) */
+  leds (75);
+  HAL_Delay (500);
+
+  /* Full on (100%) */
+  leds (100);
+  HAL_Delay (500);
+
+  /* Test each color individually */
+  red_led (100);
+  green_led (0);
+  blue_led (0);
+  HAL_Delay (500);
+
+  red_led (0);
+  green_led (100);
+  HAL_Delay (500);
+
+  green_led (0);
+  blue_led (100);
+  HAL_Delay (500);
+
+  /* Edge case: Negative brightness */
+  leds (-20);
+  HAL_Delay (500);
+
+  /* Edge case: Brightness > 100 */
+  leds (120);
+  HAL_Delay (500);
+
+  /* Interleaved transitions */
+  for (int i = 0; i <= 100; i += 10)
+    {
+      leds (i);
+      HAL_Delay (200);
+    }
+
+  for (int i = 100; i >= 0; i -= 10)
+    {
+      leds (i);
+      HAL_Delay (200);
+    }
 
 #endif /* MAIN1 */
-
-#ifdef MAIN2
-
-  red_led(0);
-  HAL_Delay(1000);
-
-  red_led(0);
-  HAL_Delay(1000);
-
-#endif /* MAIN2 */
 
   /* USER CODE END 2 */
 

@@ -1,42 +1,28 @@
-/*
- * leds.h
- *
- *  Created on: Apr 12, 2025
- *      Author: Flori
- */
+/* leds.h - Interface for RGB LED control using PWM
+   Created: April 12, 2025
+   Author: Flori (refactored per GNU standards)
+*/
 
 #ifndef INC_LEDS_H_
 #define INC_LEDS_H_
 
+#include <stdint.h>
 #include <main.h>
 
-#define LED_RED    (1 << 0)
-#define LED_GREEN  (1 << 1)
-#define LED_BLUE   (1 << 2)
+/* Set the brightness of the red LED.
+   BRIGHTNESS: value in percent (0–100), clamped internally.  */
+void red_led (int8_t brightness);
 
-/* red_led
- *
- * on != 0 => red led on, on = 0 => red led off
- */
-void red_led(uint32_t on);
+/* Set the brightness of the green LED.
+   BRIGHTNESS: value in percent (0–100), clamped internally.  */
+void green_led (int8_t brightness);
 
-/* green_led
- *
- * on != 0 => green led on, on = 0 => green led off
- */
-void green_led(uint32_t on);
+/* Set the brightness of the blue LED.
+   BRIGHTNESS: value in percent (0–100), clamped internally.  */
+void blue_led (int8_t brightness);
 
-/* blue_led
- *
- * on != 0 => blue led on, on = 0 => blue led off
- */
-void blue_led(uint32_t on);
+/* Set the brightness of all RGB LEDs equally.
+   BRIGHTNESS: value in percent (0–100), clamped internally.  */
+void leds (int8_t brightness);
 
-/* leds
- *
- * write 'val' on leds {red, green, blue}
- */
-void leds(uint16_t val);
-
-
-#endif /* INC_LEDS_H_ */
+#endif /* LEDS_H */

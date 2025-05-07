@@ -1,38 +1,85 @@
-/*
- * leds.c
- *
- *  Created on: Apr 12, 2025
- *      Author: Flori
- */
+/* leds.c - RGB LED control using PWM
+   Created: April 12, 2025
+   Author: Flori (refactored per GNU standards)
+*/
 
-#include <leds.h>
+#include "leds.h"
 
-/* led RGB :
- *   LED_RED   --> PB4
- *   LED_GREEN --> PC7
- *   LED_BLUE  --> PA9
- */
+extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim1;
 
+/* RGB LED pin mapping:
+   RED   - PB4  -> TIM3_CH1
+   GREEN - PC7  -> TIM3_CH2
+   BLUE  - PA9  -> TIM1_CH2
+*/
 
-
-void red_led(uint32_t on)
+/* Internal helper to clamp brightness to [0, 100] */
+static inline int8_t
+clamp_brightness (int8_t brightness)
 {
-	HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, on ? GPIO_PIN_RESET : GPIO_PIN_SET);
+  if (brightness < 0)
+    return 0;
+  if (brightness > 100)
+    return 100;
+  return brightness;
 }
 
-void green_led(uint32_t on)
+/* Internal helper to compute pulse from brightness */
+static inline uint32_t
+compute_pulse (TIM_HandleTypeDef *htim, int8_t brightness)
 {
-    HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, on ? GPIO_PIN_RESET : GPIO_PIN_SET);
+  uint32_t period = htim->Init.Period + 1;
+  return (100 - brightness) * period / 100;
 }
 
-void blue_led(uint32_t on)
+/* Internal helper to set PWM duty cycle */
+static void
+set_led_pwm (TIM_HandleTypeDef *htim, uint32_t channel, int8_t brightness)
 {
-    HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, on ? GPIO_PIN_RESET : GPIO_PIN_SET);
+  uint32_t pulse;
+
+  brightness = clamp_brightness (brightness);
+  pulse = compute_pulse (htim, brightness);
+
+  HAL_TIM_PWM_Start (htim, channel);
+
+  switch (brightness)
+    {
+    case 0:
+      __HAL_TIM_SET_COMPARE (htim, channel, htim->Init.Period);
+      break;
+    case 100:
+      __HAL_TIM_SET_COMPARE (htim, channel, 0);
+      break;
+    default:
+      __HAL_TIM_SET_COMPARE (htim, channel, pulse);
+      break;
+    }
 }
 
-void leds(uint16_t val)
+void
+red_led (int8_t brightness)
 {
-    red_led((val & LED_RED) != 0);
-    green_led((val & LED_GREEN) != 0);
-    blue_led((val & LED_BLUE) != 0);
+  set_led_pwm (&htim3, TIM_CHANNEL_1, brightness);
+}
+
+void
+green_led (int8_t brightness)
+{
+  set_led_pwm (&htim3, TIM_CHANNEL_2, brightness);
+}
+
+void
+blue_led (int8_t brightness)
+{
+  set_led_pwm (&htim1, TIM_CHANNEL_2, brightness);
+}
+
+void
+leds (int8_t brightness)
+{
+  red_led (brightness);
+  green_led (brightness);
+  blue_led (brightness);
 }
