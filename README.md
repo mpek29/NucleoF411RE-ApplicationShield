@@ -3,7 +3,7 @@
 ## 🚀 Overview
 ![Main Preview](assets/img/main.png)
 
-**NucleoF411RE-ApplicationShield** is an open-source firmware project designed to leverage the **Nucleo-F411RE** development board in conjunction with the **Application Shield** from ARMmbed. This project aims to assemble a comprehensive codebase that explores all the functionalities offered by the combination of the Nucleo-F411RE and the Application Shield.
+**NucleoF411RE-ApplicationShield** is an open-source firmware project designed to leverage the **Nucleo-F411RE** development board in conjunction with the **Application Shield** from ARMmbed. This project explores all the functionalities offered by the combination of the Nucleo-F411RE and the Application Shield, providing a comprehensive codebase for testing and demonstrating the capabilities of the microcontroller.
 
 ## 🎯 Purpose
 - 🔌 **GPIO Control**: Interact with GPIO pins for reading, writing values, and generating PWM signals.
@@ -24,26 +24,31 @@
 | 📺 **SPI Communication**   | Control an LCD display using SPI.             |
 | 🎚️ **ADC Usage**         | Read potentiometer angles through ADC.        |
 
-## ApplicationShield Schematic
-<img src="assets/img/app_shield_sch.png" alt="ApplicationShield Schematic" height="auto" width="100%">
-
-## Nucleo-F411RE Extension Schematic
-<img src="assets/img/nucleof411re_ext_con.png" alt="Nucleo-F411RE Extension Schematic" height="auto" width="100%">
-
 ## 🎛️ Example Applications
-1. **GPIO Test**: Read/write values and generate PWM to control LED brightness on the board.
-2. **ADC Potentiometer Reading**: Capture the angle of potentiometers using the ADC.
-3. **Button Press Detection**: Utilize timers to differentiate between short and long presses on a push button.
-4. **LED Blinking with Interrupts**: Implement interrupt-driven blinking of an LED based on timer events or button presses.
-5. **Serial Communication**: Establish communication between the computer and Nucleo-F411RE for data exchange.
-6. **I2C Temperature Reading**: Communicate with the LM75 temperature sensor and MMA7660 accelerometer via I2C.
-7. **SPI LCD Control**: Use SPI to manage an LCD display connected to the development board.
 
+### 1. **PWM via LED**
+Utilize **PWM (Pulse Width Modulation)** to control the brightness of an LED. By adjusting the duty cycle, the LED can be dimmed or brightened, allowing for various visual effects. This is particularly useful for applications such as light dimming or motor speed control.
 
-## 📐 System Architecture
-| 🔌 GPIO Control | ⏲️ Timer Management | ⚠️ Interrupts | 💬 Serial Communication |
-|----------------|---------------------|---------------|------------------------|
-| Control LEDs and buttons | Manage button press timing | Trigger actions on interrupts | Exchange data with the computer |
+### 2. **GPIO Input + Interrupt via Joystick**
+Configure a GPIO pin as an input to detect changes from the joystick. Using **interrupts**, the system can react instantly to joystick movements or button presses. This setup allows for immediate actions, such as controlling LEDs or triggering other components based on user input.
+
+### 3. **ADC Potentiometer Reading**
+Use the **ADC (Analog-to-Digital Converter)** to read values from a potentiometer. This can be applied to adjust parameters like light intensity or motor speed based on the position of the potentiometer. 
+
+### 4. **Button Press Detection with Timer**
+Detect button presses with the help of **timers** to differentiate between short and long presses. For example, a short press can trigger a simple action like toggling a LED, while a long press can activate a different feature, such as entering a configuration mode.
+
+### 5. **LED Blinking with Interrupts**
+Implement **interrupt-driven blinking** of an LED based on timer events or button presses. This can be useful in applications where you want to signal an event with an LED, without continuously checking the button state.
+
+### 6. **Serial Communication**
+Establish **serial communication** between the Nucleo-F411RE and a PC for data exchange. This can be used for debugging, sending sensor readings, or receiving commands from the computer.
+
+### 7. **I2C Temperature Reading**
+Use the **I2C protocol** to communicate with temperature sensors such as the LM75. This data can then be used for environmental monitoring or to trigger actions based on temperature thresholds.
+
+### 8. **SPI LCD Control**
+Use the **SPI protocol** to control an LCD display. This application could display system status, sensor readings, or any other relevant information on a small screen.
 
 ## 📜 Code Structure
 ```bash
@@ -52,7 +57,7 @@
 │   ├── main.c        # Main firmware loop
 │   ├── gpio.c        # GPIO handling and PWM
 │   ├── timers.c      # Timer management
-│   ├── interrupts.c   # Interrupt handling
+│   ├── interrupts.c  # Interrupt handling
 │   ├── serial.c      # Serial communication control
 │   ├── i2c.c         # I2C communication
 │   ├── spi.c         # SPI communication for LCD
