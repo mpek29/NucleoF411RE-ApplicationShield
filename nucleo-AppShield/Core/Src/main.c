@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -25,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "leds.h"
+#include "pot.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -34,7 +36,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define MAIN1
+#define MAIN3
+#define ADC_MAX_VALUE 4095U
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -45,7 +48,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+char buf[50];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -91,6 +94,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM1_Init();
   MX_TIM3_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 #ifdef MAIN1
 
@@ -153,12 +157,30 @@ int main(void)
 
 #endif /* MAIN1 */
 
+#ifdef MAIN3
+
+/* === POT MODULE FUNCTIONALITY TESTS === */
+  static uint32_t adc_raw_values[2] = {0};
+  static uint32_t adc_scaled_value_1 = 0;
+  static uint32_t adc_scaled_value_2 = 0;
+#endif
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+#ifdef MAIN3
+    // Acquire raw ADC values from both potentiometers simultaneously
+    pots(adc_raw_values);
+
+    // Scale ADC values to percentage (0 - 100%)
+    adc_scaled_value_1 = (adc_raw_values[0] * 100U) / ADC_MAX_VALUE;
+    green_led(adc_scaled_value_1);
+
+    adc_scaled_value_2 = (adc_raw_values[1] * 100U) / ADC_MAX_VALUE;
+    red_led(adc_scaled_value_2);
+#endif
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

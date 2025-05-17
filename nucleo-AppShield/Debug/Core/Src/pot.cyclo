@@ -1,0 +1,4 @@
+../Core/Src/pot.c:20:6:read_adc	3
+../Core/Src/pot.c:40:6:pot_1	1
+../Core/Src/pot.c:46:6:pot_2	1
+../Core/Src/pot.c:52:6:pots	1
