@@ -32,8 +32,8 @@ Utilize **PWM (Pulse Width Modulation)** to control the brightness of an LED. By
 ### 2. **GPIO Input + Interrupt via Joystick**
 Configure a GPIO pin as an input to detect changes from the joystick. Using **interrupts**, the system can react instantly to joystick movements or button presses. This setup allows for immediate actions, such as controlling LEDs or triggering other components based on user input.
 
-### 3. **ADC Potentiometer Reading**
-Use the **ADC (Analog-to-Digital Converter)** to read values from a potentiometer. This can be applied to adjust parameters like light intensity or motor speed based on the position of the potentiometer. 
+### 3. **ADC Potentiometer Reading**  
+Use the **ADC (Analog-to-Digital Converter)** to read values from a potentiometer. These values can then be used to control parameters such as the brightness of an LED through **PWM (Pulse-Width Modulation)**, allowing the LED intensity to vary according to the potentiometer’s position.
 
 ### 4. **Button Press Detection with Timer**
 Detect button presses with the help of **timers** to differentiate between short and long presses. For example, a short press can trigger a simple action like toggling a LED, while a long press can activate a different feature, such as entering a configuration mode.
