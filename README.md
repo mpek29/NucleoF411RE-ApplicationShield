@@ -24,6 +24,12 @@
 | 📺 **SPI Communication**   | Control an LCD display using SPI.             |
 | 🎚️ **ADC Usage**         | Read potentiometer angles through ADC.        |
 
+## ApplicationShield Schematic
+<img src="assets/img/app_shield_sch.png" alt="ApplicationShield Schematic" height="auto" width="50%">
+
+## Nucleo-F411RE Extension Schematic
+<img src="assets/img/nucleof411re_ext_con.png" alt="Nucleo-F411RE Extension Schematic" height="auto" width="50%">
+
 ## 🎛️ Example Applications
 
 ### 1. **PWM via LED**
