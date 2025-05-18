@@ -35,8 +35,8 @@
 ### 1. **PWM via LED**
 Utilize **PWM (Pulse Width Modulation)** to control the brightness of an LED. By adjusting the duty cycle, the LED can be dimmed or brightened, allowing for various visual effects. This is particularly useful for applications such as light dimming or motor speed control.
 
-### 2. **GPIO Input + Interrupt via Joystick**
-Configure a GPIO pin as an input to detect changes from the joystick. Using **interrupts**, the system can react instantly to joystick movements or button presses. This setup allows for immediate actions, such as controlling LEDs or triggering other components based on user input.
+### 2. **GPIO Input via Joystick**
+Use the **GPIO** to read the logical levels from the joystick. The program update outputs such as LEDs based on the current status of the joystick buttons.
 
 ### 3. **ADC Potentiometer Reading**  
 Use the **ADC (Analog-to-Digital Converter)** to read values from a potentiometer. These values can then be used to control parameters such as the brightness of an LED through **PWM (Pulse-Width Modulation)**, allowing the LED intensity to vary according to the potentiometer’s position.
