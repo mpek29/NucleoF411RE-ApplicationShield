@@ -41,8 +41,8 @@ Use the **GPIO** to read the logical levels from the joystick. The program updat
 ### 3. **ADC Potentiometer Reading**  
 Use the **ADC (Analog-to-Digital Converter)** to read values from a potentiometer. These values can then be used to control parameters such as the brightness of an LED through **PWM (Pulse-Width Modulation)**, allowing the LED intensity to vary according to the potentiometer’s position.
 
-### 4. **Button Press Detection with Timer**
-Detect button presses with the help of **timers** to differentiate between short and long presses. For example, a short press can trigger a simple action like toggling a LED, while a long press can activate a different feature, such as entering a configuration mode.
+### 4. **PWM via Speaker**
+Utilize **PWM (Pulse Width Modulation)** to generate sounds via a speaker. By varying the **frequency**, not the duty cycle, different tones can be produced. The duty cycle remains constant while frequency changes create distinct audible notes. This method is commonly used for sound generation and simple audio signals."
 
 ### 5. **LED Blinking with Interrupts**
 Implement **interrupt-driven blinking** of an LED based on timer events or button presses. This can be useful in applications where you want to signal an event with an LED, without continuously checking the button state.
