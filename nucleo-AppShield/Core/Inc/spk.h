@@ -1,0 +1,21 @@
+/*
+ * spk.h
+ *
+ *  Created on: May 19, 2025
+ *      Author: Flori
+ */
+
+#ifndef INC_SPK_H_
+#define INC_SPK_H_
+
+#include <stdint.h>
+#include <main.h>
+
+// Exemple d'émission d'une onde sonore sur un haut-parleur
+void speaker_tone(uint32_t frequency_hz);
+
+// Pour arrêter le son
+void speaker_off(void);
+
+
+#endif /* INC_SPK_H_ */

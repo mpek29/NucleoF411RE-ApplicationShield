@@ -1,0 +1,38 @@
+/*
+ * sw.h
+ *
+ *  Created on: May 18, 2025
+ *      Author: Flori
+ */
+
+#ifndef INC_SW_H_
+#define INC_SW_H_
+
+void read_GPIO(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
+
+//SW_UP PA4
+GPIO_PinState sw_up() {
+    return read_GPIO(GPIOA, GPIO_PIN_4);
+}
+
+//SW_RIGHT PC0
+GPIO_PinState sw_right() {
+    return read_GPIO(GPIOC, GPIO_PIN_0);
+}
+
+//SW_LEFT PC1
+GPIO_PinState sw_left() {
+    return read_GPIO(GPIOC, GPIO_PIN_1);
+}
+
+//SW_DOWN PB0
+GPIO_PinState sw_down() {
+    return read_GPIO(GPIOB, GPIO_PIN_0);
+}
+
+//SW_CENTER PB5
+GPIO_PinState sw_center() {
+    return read_GPIO(GPIOB, GPIO_PIN_5);
+}
+
+#endif /* INC_SW_H_ */

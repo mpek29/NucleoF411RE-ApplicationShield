@@ -3,6 +3,7 @@
    Author: Flori (refactored per GNU standards)
 */
 
+#include "pwm.h"
 #include "leds.h"
 
 extern TIM_HandleTypeDef htim3;
@@ -33,47 +34,22 @@ compute_pulse (TIM_HandleTypeDef *htim, int8_t brightness)
   return (100 - brightness) * period / 100;
 }
 
-/* Internal helper to set PWM duty cycle */
-static void
-set_led_pwm (TIM_HandleTypeDef *htim, uint32_t channel, int8_t brightness)
-{
-  uint32_t pulse;
-
-  brightness = clamp_brightness (brightness);
-  pulse = compute_pulse (htim, brightness);
-
-  HAL_TIM_PWM_Start (htim, channel);
-
-  switch (brightness)
-    {
-    case 0:
-      __HAL_TIM_SET_COMPARE (htim, channel, htim->Init.Period);
-      break;
-    case 100:
-      __HAL_TIM_SET_COMPARE (htim, channel, 0);
-      break;
-    default:
-      __HAL_TIM_SET_COMPARE (htim, channel, pulse);
-      break;
-    }
-}
-
 void
 red_led (int8_t brightness)
 {
-  set_led_pwm (&htim3, TIM_CHANNEL_1, brightness);
+	set_pwm_device(&htim3, TIM_CHANNEL_1, 976, brightness);
 }
 
 void
 green_led (int8_t brightness)
 {
-  set_led_pwm (&htim3, TIM_CHANNEL_2, brightness);
+	set_pwm_device(&htim3, TIM_CHANNEL_2, 976, brightness);
 }
 
 void
 blue_led (int8_t brightness)
 {
-  set_led_pwm (&htim1, TIM_CHANNEL_2, brightness);
+	set_pwm_device(&htim1, TIM_CHANNEL_2, 976, brightness);
 }
 
 void
@@ -82,4 +58,15 @@ leds (int8_t brightness)
   red_led (brightness);
   green_led (brightness);
   blue_led (brightness);
+}
+
+void leds_rgb(uint8_t R, uint8_t G, uint8_t B)
+{
+    uint8_t red_brightness = (R * 100) / 255;
+    uint8_t green_brightness = (G * 100) / 255;
+    uint8_t blue_brightness = (B * 100) / 255;
+
+    red_led(red_brightness);
+    green_led(green_brightness);
+    blue_led(blue_brightness);
 }

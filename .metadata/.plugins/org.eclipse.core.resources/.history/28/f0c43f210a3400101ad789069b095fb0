@@ -1,0 +1,28 @@
+/*
+ * sw.h
+ *
+ *  Created on: May 18, 2025
+ *      Author: Flori
+ */
+
+#ifndef INC_SW_H_
+#define INC_SW_H_
+
+void read_GPIO(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
+
+//SW_UP PA4
+void sw_up();
+
+//SW_RIGHT PC0
+void sw_right();
+
+//SW_LEFT PC1
+void sw_left();
+
+//SW_DOWN PB0
+void sw_down();
+
+//SW_CENTER PB5
+void sw_center();
+
+#endif /* INC_SW_H_ */

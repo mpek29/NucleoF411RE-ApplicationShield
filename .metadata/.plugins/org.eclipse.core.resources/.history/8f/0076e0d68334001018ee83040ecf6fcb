@@ -1,0 +1,23 @@
+/*
+ * spk.h
+ *
+ *  Created on: May 19, 2025
+ *      Author: Flori
+ */
+
+#ifndef INC_SPK_H_
+#define INC_SPK_H_
+
+// Configure le PWM avec fréquence (Hz) et duty cycle (%).
+static void set_pwm_device(TIM_HandleTypeDef *htim, uint32_t channel, uint32_t freq_hz, uint8_t duty_percent);
+
+// Exemple d'émission d'une onde sonore sur un haut-parleur
+void speaker_tone(uint32_t frequency_hz);
+
+// Pour arrêter le son
+void speaker_off(void) {
+  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, 0);
+}
+
+
+#endif /* INC_SPK_H_ */

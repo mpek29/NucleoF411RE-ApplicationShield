@@ -1,0 +1,2 @@
+../Core/Src/spk.c:14:6:speaker_tone	16	static
+../Core/Src/spk.c:19:6:speaker_off	4	static

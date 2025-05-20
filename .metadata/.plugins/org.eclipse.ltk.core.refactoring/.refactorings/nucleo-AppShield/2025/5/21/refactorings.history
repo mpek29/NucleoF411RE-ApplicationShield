@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;nucleo-AppShield/Core/Inc/pwm&apos; to &apos;pwm.h&apos;" description="Rename resource &apos;pwm&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Inc/pwm" name="pwm.h" stamp="1747640345507" updateReferences="true"/>
+</session>

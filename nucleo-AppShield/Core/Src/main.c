@@ -27,6 +27,8 @@
 /* USER CODE BEGIN Includes */
 #include "leds.h"
 #include "pot.h"
+#include "sw.h"
+#include "spk.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -36,7 +38,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define MAIN3
+#define MAIN4
 #define ADC_MAX_VALUE 4095U
 /* USER CODE END PD */
 
@@ -95,6 +97,7 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM3_Init();
   MX_ADC1_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 #ifdef MAIN1
 
@@ -157,6 +160,11 @@ int main(void)
 
 #endif /* MAIN1 */
 
+#ifdef MAIN2
+  /* === SW  MODULE FUNCTIONALITY TESTS === */
+
+#endif /* MAIN2 */
+
 #ifdef MAIN3
 
 /* === POT MODULE FUNCTIONALITY TESTS === */
@@ -164,12 +172,85 @@ int main(void)
   static uint32_t adc_scaled_value_1 = 0;
   static uint32_t adc_scaled_value_2 = 0;
 #endif
+
+#ifdef MAIN4
+
+/* === SPK MODULE FUNCTIONALITY TESTS === */
+  // Fréquences en Hz
+  #define NOTE_RE 294
+  #define NOTE_MI 330
+  #define NOTE_FA 349
+  #define NOTE_SOL 392
+  #define NOTE_LA 440
+  #define NOTE_SI 494
+  #define NOTE_DO_H 523
+  #define NOTE_PAUSE 0
+
+  uint16_t melody[] = {
+      NOTE_SOL, NOTE_SOL, NOTE_LA, NOTE_SOL, NOTE_DO_H, NOTE_SI,
+      NOTE_SOL, NOTE_SOL, NOTE_LA, NOTE_SOL, NOTE_RE, NOTE_DO_H,
+      NOTE_SOL, NOTE_SOL, NOTE_SOL, NOTE_DO_H, NOTE_DO_H, NOTE_SI,
+      NOTE_LA, NOTE_FA, NOTE_SOL, NOTE_SOL, NOTE_LA, NOTE_SOL, NOTE_RE, NOTE_DO_H
+  };
+
+  uint16_t durations[] = {
+      400, 400, 800, 800, 800, 1600,
+      400, 400, 800, 800, 800, 1600,
+      400, 400, 400, 800, 800, 1600,
+      400, 400, 400, 400, 800, 800, 800, 1600
+  };
+
+  // Lecture de la mélodie
+      for (int i = 0; i < sizeof(melody)/sizeof(melody[0]); i++) {
+          if (melody[i] == NOTE_PAUSE) {
+              speaker_off();
+          } else {
+              speaker_tone(melody[i]);
+          }
+
+          HAL_Delay(durations[i]);
+          speaker_off();
+          HAL_Delay(50);  // courte pause entre les notes
+      }
+
+
+#endif
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+#ifdef MAIN2
+
+	/* === SW  MODULE FUNCTIONALITY TESTS === */
+	if (sw_up()) {
+		// Rouge vif (255, 0, 0)
+		leds_rgb(255, 0, 0);
+	}
+	else if (sw_right()) {
+		// Vert lime (50, 205, 50)
+		leds_rgb(50, 205, 50);
+	}
+	else if (sw_left()) {
+		// Bleu ciel (135, 206, 235)
+		leds_rgb(135, 206, 235);
+	}
+	else if (sw_down()) {
+		// Orange (255, 165, 0)
+		leds_rgb(255, 165, 0);
+	}
+	else if (sw_center()) {
+		// Violet moyen (148, 0, 211)
+		leds_rgb(148, 0, 211);
+	}
+	else {
+		// Aucun bouton appuyé, éteindre LEDs
+		leds_rgb(0, 0, 0);
+	}
+
+
+#endif /* MAIN2 */
 #ifdef MAIN3
     // Acquire raw ADC values from both potentiometers simultaneously
     pots(adc_raw_values);

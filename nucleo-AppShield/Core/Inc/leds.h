@@ -25,4 +25,5 @@ void blue_led (int8_t brightness);
    BRIGHTNESS: value in percent (0–100), clamped internally.  */
 void leds (int8_t brightness);
 
+void leds_rgb(uint8_t R, uint8_t G, uint8_t B);
 #endif /* LEDS_H */

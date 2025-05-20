@@ -1,0 +1,6 @@
+../Core/Src/sw.c:16:15:read_GPIO	1
+../Core/Src/sw.c:21:15:sw_up	1
+../Core/Src/sw.c:26:15:sw_right	1
+../Core/Src/sw.c:31:15:sw_left	1
+../Core/Src/sw.c:36:15:sw_down	1
+../Core/Src/sw.c:41:15:sw_center	1

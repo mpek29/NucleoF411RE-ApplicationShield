@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;nucleo-AppShield/Core/Inc/pwm.h&apos;" deleteContents="false" description="Delete resource &apos;nucleo-AppShield/Core/Inc/pwm.h&apos;" element1="/nucleo-AppShield/Core/Inc/pwm.h" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1747640355334"/>
+</session>

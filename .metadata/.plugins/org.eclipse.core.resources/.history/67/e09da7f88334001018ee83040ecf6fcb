@@ -1,0 +1,95 @@
+/* leds.c - RGB LED control using PWM
+   Created: April 12, 2025
+   Author: Flori (refactored per GNU standards)
+*/
+
+#include "leds.h"
+
+extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim1;
+
+/* RGB LED pin mapping:
+   RED   - PB4  -> TIM3_CH1
+   GREEN - PC7  -> TIM3_CH2
+   BLUE  - PA9  -> TIM1_CH2
+*/
+
+/* Internal helper to clamp brightness to [0, 100] */
+static inline int8_t
+clamp_brightness (int8_t brightness)
+{
+  if (brightness < 0)
+    return 0;
+  if (brightness > 100)
+    return 100;
+  return brightness;
+}
+
+/* Internal helper to compute pulse from brightness */
+static inline uint32_t
+compute_pulse (TIM_HandleTypeDef *htim, int8_t brightness)
+{
+  uint32_t period = htim->Init.Period + 1;
+  return (100 - brightness) * period / 100;
+}
+
+/* Internal helper to set PWM duty cycle */
+static void
+set_pwm_device(TIM_HandleTypeDef *htim, uint32_t channel, uint32_t freq_hz, uint8_t duty_percent) {
+    if (freq_hz == 0 || duty_percent > 100) return;  // Paramètres invalides
+
+    // Récupère la fréquence d’horloge du timer (ici on suppose APB1 x2 pour TIM2/3/4/5, sinon adapter)
+    uint32_t timer_clk = HAL_RCC_GetPCLK1Freq() * 2;
+
+    // Calcule l'auto-reload value (ARR) pour la fréquence souhaitée
+    uint32_t arr = (timer_clk / freq_hz) - 1;
+
+    // Met à jour le registre ARR
+    __HAL_TIM_SET_AUTORELOAD(htim, arr);
+
+    // Calcule la valeur du registre CCR (rapport cyclique)
+    uint32_t pulse = (arr + 1) * duty_percent / 100;
+
+    // Démarre le PWM
+    HAL_TIM_PWM_Start(htim, channel);
+
+    // Met à jour la valeur du duty cycle
+    __HAL_TIM_SET_COMPARE(htim, channel, pulse);
+}
+
+void
+red_led (int8_t brightness)
+{
+	set_pwm_device (&htim3, TIM_CHANNEL_1, brightness);
+}
+
+void
+green_led (int8_t brightness)
+{
+	set_pwm_device (&htim3, TIM_CHANNEL_2, brightness);
+}
+
+void
+blue_led (int8_t brightness)
+{
+	set_pwm_device (&htim1, TIM_CHANNEL_2, brightness);
+}
+
+void
+leds (int8_t brightness)
+{
+  red_led (brightness);
+  green_led (brightness);
+  blue_led (brightness);
+}
+
+void leds_rgb(uint8_t R, uint8_t G, uint8_t B)
+{
+    uint8_t red_brightness = (R * 100) / 255;
+    uint8_t green_brightness = (G * 100) / 255;
+    uint8_t blue_brightness = (B * 100) / 255;
+
+    red_led(red_brightness);
+    green_led(green_brightness);
+    blue_led(blue_brightness);
+}

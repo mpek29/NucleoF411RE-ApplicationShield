@@ -1,0 +1,44 @@
+/* leds.c - SW read using GPIO
+   Created: May 18, 2025
+   Author: Flori (refactored per GNU standards)
+*/
+
+#include "leds.c"
+
+/* SW pin mapping:
+   SW_UP - A2 - PA4  -> GPIO_Input
+   SW_RIGHT - A5 - PC0  -> GPIO_Input
+   SW_LEFT - A4 - PC1  -> GPIO_Input
+   SW_DOWN - A3 - PB0  -> GPIO_Input
+   SW_CENTER - D4 - PB5  -> GPIO_Input
+*/
+
+GPIO_PinState  read_GPIO(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin){
+	return HAL_GPIO_ReadPin(GPIOx, GPIO_Pin);
+}
+
+//SW_UP PA4
+GPIO_PinState  sw_up(){
+	return read_GPIO(GPIO_TypeDef* GPIOx, GPIO_PIN_4);
+}
+
+//SW_RIGHT PC0
+GPIO_PinState  sw_right(){
+	return read_GPIO(GPIO_TypeDef* GPIOx, GPIO_PIN_0);
+}
+
+//SW_LEFT PC1
+GPIO_PinState  sw_left(){
+	return read_GPIO(GPIO_TypeDef* GPIOx, GPIO_PIN_1);
+}
+
+//SW_DOWN PB0
+GPIO_PinState  sw_down(){
+	return read_GPIO(GPIO_TypeDef* GPIOx, GPIO_PIN_0);
+}
+
+//SW_CENTER PB5
+GPIO_PinState  sw_center(){
+	return read_GPIO(GPIO_TypeDef* GPIOx, GPIO_PIN_5);
+
+}

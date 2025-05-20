@@ -1,0 +1,30 @@
+/*
+ * sw.h
+ *
+ *  Created on: May 18, 2025
+ *      Author: Flori
+ */
+
+#ifndef INC_SW_H_
+#define INC_SW_H_
+
+#include "stm32f1xx_hal.h"
+
+GPIO_PinState read_GPIO(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
+
+//SW_UP PA4
+GPIO_PinState sw_up();
+
+//SW_RIGHT PC0
+GPIO_PinState sw_right();
+
+//SW_LEFT PC1
+GPIO_PinState sw_left();
+
+//SW_DOWN PB0
+GPIO_PinState sw_down();
+
+//SW_CENTER PB5
+GPIO_PinState sw_center();
+
+#endif /* INC_SW_H_ */

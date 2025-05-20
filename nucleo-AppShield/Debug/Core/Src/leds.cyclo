@@ -1,7 +1,5 @@
-../Core/Src/leds.c:19:1:clamp_brightness	3
-../Core/Src/leds.c:30:1:compute_pulse	1
-../Core/Src/leds.c:38:1:set_led_pwm	12
-../Core/Src/leds.c:62:1:red_led	1
-../Core/Src/leds.c:68:1:green_led	1
-../Core/Src/leds.c:74:1:blue_led	1
-../Core/Src/leds.c:80:1:leds	1
+../Core/Src/leds.c:38:1:red_led	1
+../Core/Src/leds.c:44:1:green_led	1
+../Core/Src/leds.c:50:1:blue_led	1
+../Core/Src/leds.c:56:1:leds	1
+../Core/Src/leds.c:63:6:leds_rgb	1
