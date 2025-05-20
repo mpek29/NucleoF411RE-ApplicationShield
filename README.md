@@ -44,16 +44,13 @@ Use the **ADC (Analog-to-Digital Converter)** to read values from a potentiomete
 ### 4. **PWM via Speaker**
 Utilize **PWM (Pulse Width Modulation)** to generate sounds via a speaker. By varying the **frequency**, not the duty cycle, different tones can be produced. The duty cycle remains constant while frequency changes create distinct audible notes. This method is commonly used for sound generation and simple audio signals."
 
-### 5. **LED Blinking with Interrupts**
-Implement **interrupt-driven blinking** of an LED based on timer events or button presses. This can be useful in applications where you want to signal an event with an LED, without continuously checking the button state.
-
-### 6. **Serial Communication**
+### 5. **Serial Communication**
 Establish **serial communication** between the Nucleo-F411RE and a PC for data exchange. This can be used for debugging, sending sensor readings, or receiving commands from the computer.
 
-### 7. **I2C Temperature Reading**
+### 6. **I2C Temperature Reading**
 Use the **I2C protocol** to communicate with temperature sensors such as the LM75. This data can then be used for environmental monitoring or to trigger actions based on temperature thresholds.
 
-### 8. **SPI LCD Control**
+### 7. **SPI LCD Control**
 Use the **SPI protocol** to control an LCD display. This application could display system status, sensor readings, or any other relevant information on a small screen.
 
 ## 📜 Code Structure
